@@ -1,52 +1,53 @@
-describe('LED', function() {
-    var grid;
+describe('LCD', function () {
     var inputs;
-    var gridNum;
+    var allLcds;
 
-    beforeEach(function() {
-       
+    beforeEach(function () {
         inputs = 910;
-        grid=["._.","...","|.|","..|","._|","|_|","|_."];
-        gridNum=[[0,2,5],[1,3,3],[0,4,6],[0,4,4],[1,5,3],[0,6,5],[0,6,5],[0,3,3],[0,5,5],[0,5,3]];
+        allLcds = loadAllLcds();
     });
 
-    describe('Unit Test', function() {
-        describe('Text stringarray',function () {
-            it('return right stringarray',function () {
-                var stringarray= buildNumberToStringArray(inputs);
-                expect(stringarray).toEqual(["9","1","0"]);
+    describe('Unit Test', function () {
+        
+        describe('Text numberarray', function () {
+            inputs = 910;
+            it('return right numberarray', function () {
+                var numberArray = buildNumberArray(inputs);
+
+                expect(numberArray).toEqual([9, 1, 0]);
 
             });
 
         });
-    });
-    describe('Unit Test', function() {
-        describe('Text allStr',function () {
-            it('return right allStr',function () {
-                var stringarray= buildNumberToStringArray(inputs);
-                var allStr= buildNumberString(stringarray,grid,gridNum) ;
-                expect(allStr).toEqual(
-                    "\n"+"._."+" "+"..."+" "+"._."+" "+"\n" +"|_|"+" "+"..|"+" "+"|.|"+" "+"\n" +"..|"+" "+"..|"+" "+"|_|"+" "+"\n"
 
+        describe('Text lcdarray', function () {
+            inputs = 910;
+            it('return right lcdarray', function () {
+                var numberArray = buildNumberArray(inputs);
+                var lcdArray = buildLcdString(allLcds, numberArray);
+
+                expect(lcdArray).toEqual(
+                    [['._.', '|_|', '..|'], ['...', '..|', '..|'], ['._.', '|.|', '|_|']]
                 );
 
             });
 
         });
     });
-    
-    
-    
-    it('should print correct text', function() {
 
-        spyOn(console, 'log');
+    describe('Integration Testing', function () {
+        inputs = 910;
+        it('should print correct text', function () {
 
-        printReceipt(inputs,grid,gridNum);
+            spyOn(console, 'log');
 
-        var expectText ="\n"+"._."+" "+"..."+" "+"._."+" "+"\n" +"|_|"+" "+"..|"+" "+"|.|"+" "+"\n" +"..|"+" "+"..|"+" "+"|_|"+" "+"\n"
-      
+            printLcd(inputs);
 
-    expect(console.log).toHaveBeenCalledWith(expectText);
+            var expectText = '._. ... ._.\n' + '|_| ..| |.|\n' + '..| ..| |_|';
+
+
+            expect(console.log).toHaveBeenCalledWith(expectText);
+        });
     });
 });
 

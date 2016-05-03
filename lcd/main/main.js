@@ -1,43 +1,39 @@
-function printReceipt(inputs, grid, gridNum) {
-
-    var stringArray1 = buildNumberToStringArray(inputs);
-    var allstr = buildNumberString(stringArray1, grid, gridNum);
-
-    console.log(allstr);
+function printLcd(inputs) {
+    var allLcds = loadAllLcds();
+    var numberArray = buildNumberArray(inputs);
+    var lcdArray = buildLcdString(allLcds, numberArray);
+    var finalLcd = printString(lcdArray);
+    console.log(finalLcd);
 
 }
-function buildNumberToStringArray(inputs) {
 
+function buildNumberArray(inputs) {
     var src = inputs.toString();
+    var numberArray = [];
     var stringArray = src.split("");
 
-    return stringArray;
-
-}
-
-function buildNumberString(stringArray, grid, gridNum) {
-
-    var allStr = "\n";
-    var str = "";
-
-    for (var j = 0; j < 3; j++) {
-        allStr += buildEveryRow(stringArray, gridNum, j, grid) + "\n";
-    }
-
-    return allStr;
-}
-
-function buildEveryRow(stringArray, gridNum, row, grid) {
-
-    var str = "";
-
     for (var i = 0; i < stringArray.length; i++) {
-        var num = parseInt(stringArray[i]);
-        var arr = gridNum[num];
-        var elem = grid[arr[row]];
-        str += elem + " ";
+        numberArray.push(parseInt(stringArray[i]));
     }
 
-    return str;
+    return numberArray;
+}
+
+function buildLcdString(allLcds, numberArray) {
+    var lcdArray = [];
+
+    for (var i = 0; i < numberArray.length; i++) {
+        lcdArray.push(allLcds[numberArray[i]]);
+    }
+
+    return lcdArray;
+}
+
+function printString(lcdArray) {
+    var printString;
+    printString = lcdArray[0][0] + ' ' + lcdArray[1][0] + ' ' + lcdArray[2][0] + '\n' + lcdArray[0][1] + ' ' + lcdArray[1][1] + ' ' + lcdArray[2][1] + '\n' +
+        lcdArray[0][2] + ' ' + lcdArray[1][2] + ' ' + lcdArray[2][2];
+
+    return printString;
 }
 
