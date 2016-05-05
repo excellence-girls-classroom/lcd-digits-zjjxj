@@ -3,14 +3,14 @@ function printLcd(inputs) {
     var numberArray = buildNumberArray(inputs);
     var lcdArray = buildLcdString(allLcds, numberArray);
     var finalLcd = printString(lcdArray);
-    console.log(finalLcd);
 
+    console.log(finalLcd);
 }
 
 function buildNumberArray(inputs) {
-    var src = inputs.toString();
+    var numberString = inputs.toString();
     var numberArray = [];
-    var stringArray = src.split("");
+    var stringArray = numberString.split("");
 
     for (var i = 0; i < stringArray.length; i++) {
         numberArray.push(parseInt(stringArray[i]));
@@ -30,9 +30,16 @@ function buildLcdString(allLcds, numberArray) {
 }
 
 function printString(lcdArray) {
-    var printString;
-    printString = lcdArray[0][0] + ' ' + lcdArray[1][0] + ' ' + lcdArray[2][0] + '\n' + lcdArray[0][1] + ' ' + lcdArray[1][1] + ' ' + lcdArray[2][1] + '\n' +
-        lcdArray[0][2] + ' ' + lcdArray[1][2] + ' ' + lcdArray[2][2];
+    var printString = '';
+
+    for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < lcdArray.length; j++) {
+            printString += lcdArray[j][i] + " ";
+        }
+        if (i < 2) {
+            printString += "\n";
+        }
+    }
 
     return printString;
 }
