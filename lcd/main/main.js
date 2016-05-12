@@ -2,19 +2,13 @@ function printLcd(inputs) {
     var allLcds = loadAllLcds();
     var numberArray = buildNumberArray(inputs);
     var lcdArray = buildLcdString(allLcds, numberArray);
-    var finalLcd = printString(lcdArray);
+    var finalLcd = printStrings(lcdArray);
 
     console.log(finalLcd);
 }
 
 function buildNumberArray(inputs) {
-    var numberString = inputs.toString();
-    var numberArray = [];
-    var stringArray = numberString.split("");
-
-    for (var i = 0; i < stringArray.length; i++) {
-        numberArray.push(parseInt(stringArray[i]));
-    }
+    var numberArray = inputs.toString().split("");
 
     return numberArray;
 }
@@ -22,20 +16,20 @@ function buildNumberArray(inputs) {
 function buildLcdString(allLcds, numberArray) {
     var lcdArray = [];
 
-    for (var i = 0; i < numberArray.length; i++) {
-        lcdArray.push(allLcds[numberArray[i]]);
-    }
+    numberArray.forEach(function (item) {
+        lcdArray.push(allLcds[item]);
+    });
 
     return lcdArray;
 }
 
-function printString(lcdArray) {
+function printStrings(lcdArray) {
     var printString = '';
 
     for (var i = 0; i < 3; i++) {
-        for (var j = 0; j < lcdArray.length; j++) {
-            printString += lcdArray[j][i] + " ";
-        }
+        lcdArray.forEach(function (item, index) {
+            printString += lcdArray[index][i] + " ";
+        });
         if (i < 2) {
             printString += "\n";
         }

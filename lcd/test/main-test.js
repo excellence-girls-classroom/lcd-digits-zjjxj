@@ -14,14 +14,14 @@ describe('LCD', function () {
             it('return right numberarray', function () {
                 var numberArray = buildNumberArray(inputs);
 
-                expect(numberArray).toEqual([9, 1, 0]);
+                expect(numberArray).toEqual(['9','1','0']);
             });
         });
 
         describe('Text lcdarray', function () {
             inputs = 910;
             it('return right lcdarray', function () {
-                var numberArray = [9, 1, 0];
+                var numberArray = ['9','1','0'];
                 var lcdArray = buildLcdString(allLcds, numberArray);
 
                 expect(lcdArray).toEqual(
